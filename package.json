@@ -1,0 +1,22 @@
+{
+  "name": "webflow-cors",
+  "version": "0.0.1",
+  "description": "A heroku app to return webflow requests with cors",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsca/webflow-cors"
+  },
+  "author": "Javier Escalante",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
+    "nodemon": "^1.11.0"
+  }
+}
