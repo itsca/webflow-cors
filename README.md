@@ -4,15 +4,11 @@ I was experimenting with the idea of using webflow cms and api to create a web a
 
 ## Getting Started
 
-All you need to do is send your request to the heroku app instead of the webdlow api with a POST metod and a body parameter that includes the api token and either the site Id for a collection or a collection Id for a site.
+All you need to do is send your request to the heroku app instead of the webflow api with a POST method and a body parameter that includes the api token and either the site Id for a collection or a collection Id for a site.
 
 ### Prerequisites
 
 A webflow site with a collection and some items, some way of making a POST request with a JSON body, like POSTMAN or angular.js for example.
-
-```
-Give examples
-```
 
 ### Installing
 
