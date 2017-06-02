@@ -1,5 +1,7 @@
 //require express
 var express = require('express');
+//require webflow
+const Webflow = require('webflow-api');
 //nodes path 
 var path = require('path');
 //create router object
@@ -8,38 +10,28 @@ var router = express.Router();
 //export router
 module.exports = router;
 
-//route for home page
-router.get('/', function(req, res) {
-	//res.send('HOME PAGE');
-	//__dirname extracts the current file directory
-	//res.sendFile(path.join(__dirname, '../index.html'));
-	//With Render when ejs is active
-	res.render('pages/home');
+////Routes
+///webFlow API routes
+//sites
+router.post('/webflow/sites', function(req, res) {
+	var api = new Webflow({ token: req.body.apiToken});
+    //Webflow API Request
+    // Promise <[ Item ]>
+    var sites = api.sites().then(items => res.send(items));
 });
-
-//route about page
-router.get('/about', function(req, res) {
-	var users = [
-		{name: "Nombre 1", email:"prueba1@gmail.com", avatar: "http://placekitten.com/200/300"},
-		{name: "Nombre 2", email:"prueba2@gmail.com", avatar: "http://placekitten.com/300/300"},
-		{name: "Nombre 3", email:"prueba3@gmail.com", avatar: "http://placekitten.com/400/300"}
-	];
-
-	res.render('pages/about', {users: users});
+//collections
+router.post('/webflow/collections', function(req, res) {
+	var api = new Webflow({ token: req.body.apiToken});
+    //Webflow API Request
+    // Promise <[ Item ]>
+    var collections = api.collections({ siteId: req.body.siteId }).then(items => res.send(items));
 });
-
-//route contact page
-router.get('/contact', function(req, res) {
-	res.render('pages/contact');
-});
-
-router.post('/contact', function(req, res) {
+//items
+router.post('/webflow/items', function(req, res) {
 	console.log(req)
-	res.send('Thanks for Contacting us, ' + req.body.name + ' we will get back to you soon');
-});
-
-//webFlow API routes
-router.get('/contact', function(req, res) {
-	res.render('pages/contact');
+	var api = new Webflow({ token: req.body.apiToken});
+    //Webflow API Request
+    // Promise <[ Item ]>
+    var getProyects = api.items({ collectionId: req.body.collectionId }).then(items => res.send(items));
 });
 

@@ -1,32 +1,25 @@
-/////////////////////////NODE HTTP SERVER///////////////////////////////////////////////////
-//import http module
-//var http =  require('http');
-//Handle sending requests and returning responses
-//function handleRquests(req,res) {
-//	res.end('hello world');
-//}
-//Create Server
-//var server = http.createServer(handleRquests);
-
-//Start server and listen on port x
-//server.listen(8080, function(){
-//	console.log('Listening on Port 8080');
-//})
 /////////////////////////EXPRESS///////////////////////////////////////////////////
 // require our dependencies
 var express = require('express');
+var cors = require('cors');
 var expressLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var app = express();
-var port = 8080;
+
+app.set('port', (process.env.PORT || 5000));
+
+//use cors
+app.use(cors());
 
 //Use ejs and express layouts
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 //Use Body Parser
-app.use(bodyParser.urlencoded()); //Allows to parsed URL encode Bodys to Javascript Object
-
+app.use(bodyParser.urlencoded({ //Allows to parsed URL encode Bodys to Javascript Object
+    extended: true
+}));
+app.use(bodyParser.json());
 
 //router
 var router = require('./app/routes');
@@ -35,7 +28,7 @@ app.use('/', router);
 //set static files (css and images, ect) location
 app.use(express.static(__dirname + '/public'));
 
-// start the server
-app.listen(port, function() {
-	console.log('app started');
+// start the app
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
